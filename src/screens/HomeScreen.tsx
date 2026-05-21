@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, RefreshControl, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, RefreshControl, StyleSheet, Image } from 'react-native';
 import { colors, monthNames } from '../theme';
 import { Show, CalendarDay, Stats, PeriodGroup } from '../models';
 import { showService } from '../services/showService';
@@ -211,6 +211,7 @@ export function HomeScreen({ navigation }: any) {
         contentContainerStyle={styles.scroll}
       >
         <View style={styles.hero}>
+          <Image source={require('../../assets/logo.png')} style={styles.heroLogo} resizeMode="contain" />
           <Text style={styles.heroTitle}>Agenda de Shows</Text>
           <Text style={styles.heroSub}>Gerencie sua agenda de apresentações</Text>
           <TouchableOpacity style={styles.heroBtn} onPress={() => openAddShow(undefined)}>
@@ -298,6 +299,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
   scroll: { paddingBottom: 32 },
   hero: { padding: 20, alignItems: 'center' },
+  heroLogo: { width: 80, height: 80, marginBottom: 12, borderRadius: 20 },
   heroTitle: { fontSize: 22, fontWeight: '800', color: colors.text, marginBottom: 4 },
   heroSub: { fontSize: 14, color: colors.textSecondary, marginBottom: 16 },
   heroBtn: {
