@@ -97,8 +97,12 @@ export function HomeScreen({ navigation }: any) {
   }, [currentMonth, currentYear, selectedDate]);
 
   useEffect(() => {
-    load();
+    load(currentMonth, currentYear);
   }, []);
+
+  useEffect(() => {
+    load(currentMonth, currentYear);
+  }, [currentYear, currentMonth]);
 
   useEffect(() => {
     if (selectedDate) {
@@ -132,11 +136,6 @@ export function HomeScreen({ navigation }: any) {
     setCurrentYear(now.getFullYear());
     setCurrentMonth(now.getMonth() + 1);
   };
-
-  useEffect(() => {
-    const map = buildShowsByDate(shows);
-    buildCalendar(currentYear, currentMonth, map);
-  }, [currentYear, currentMonth]);
 
   const stats: Stats = {
     total: shows.length,
@@ -196,6 +195,10 @@ export function HomeScreen({ navigation }: any) {
     setSelectedDate(date);
     if (dayShows.length === 0) {
       openAddShow(date);
+    } else if (dayShows.length === 1) {
+      openViewShow(dayShows[0]);
+    } else {
+      openViewShow(dayShows[0]);
     }
   };
 
@@ -298,8 +301,8 @@ export function HomeScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
   scroll: { paddingBottom: 32 },
-  hero: { padding: 20, alignItems: 'center' },
-  heroLogo: { width: 80, height: 80, marginBottom: 12, borderRadius: 20 },
+  hero: { paddingTop: 40, paddingBottom: 20, paddingHorizontal: 20, alignItems: 'center' },
+  heroLogo: { width: 120, height: 120, marginBottom: 16, borderRadius: 24 },
   heroTitle: { fontSize: 22, fontWeight: '800', color: colors.text, marginBottom: 4 },
   heroSub: { fontSize: 14, color: colors.textSecondary, marginBottom: 16 },
   heroBtn: {
